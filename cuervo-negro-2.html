@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cuervo Negro | Papelería & Servicios Técnicos · Bogotá</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════ */
+:root{
+  --cream:#F9F7F2; --white:#FFFFFF; --ink:#1A1714; --ink-mid:#3D3630; --ink-muted:#7A7167;
+  --gold:#9A7B3C; --gold-lt:#C9A84C; --gold-bg:#F5EDD8; --rule:#D9D0BE;
+  --navy:#1C2B3A; --green:#25D366; --card:#FEFDFA;
+  --sh:0 2px 24px rgba(26,23,20,.07); --sh-md:0 8px 40px rgba(26,23,20,.10);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--ink);font-family:'Lato',sans-serif;overflow-x:hidden;line-height:1.6;}
+
+/* ═══════════════════════════════════════
+   PAGE SYSTEM
+═══════════════════════════════════════ */
+.page{display:none;animation:pgIn .45s ease;}
+.page.active{display:block;}
+@keyframes pgIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+/* ═══════════════════════════════════════
+   TOP BAR
+═══════════════════════════════════════ */
+.topbar{background:var(--navy);color:#fff;font-size:.72rem;letter-spacing:.08em;padding:.45rem 1rem;display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;}
+.topbar a{color:rgba(255,255,255,.7);text-decoration:none;transition:color .2s;}
+.topbar a:hover{color:#fff;}
+.topbar .sep{opacity:.35;}
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+nav{position:sticky;top:0;z-index:900;background:var(--white);border-bottom:1px solid var(--rule);box-shadow:var(--sh);}
+.nav-inner{max-width:1240px;margin:0 auto;padding:.85rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.brand{display:flex;align-items:center;gap:.85rem;text-decoration:none;cursor:pointer;}
+.brand-emblem{width:42px;height:42px;background:var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.brand-emblem svg{width:24px;height:24px;fill:var(--gold-lt);}
+.brand-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--ink);letter-spacing:.03em;display:block;line-height:1.1;}
+.brand-sub{font-family:'Cormorant Garamond',serif;font-size:.75rem;color:var(--gold);letter-spacing:.14em;text-transform:uppercase;display:block;}
+nav ul{display:flex;align-items:center;gap:.15rem;list-style:none;flex-wrap:wrap;}
+nav ul li a{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mid);text-decoration:none;padding:.48rem .8rem;border-radius:4px;transition:color .2s,background .2s;display:block;cursor:pointer;}
+nav ul li a:hover{color:var(--gold);background:var(--gold-bg);}
+nav ul li a.nav-active{color:var(--gold);background:var(--gold-bg);}
+.nav-wa{background:var(--green)!important;color:#fff!important;border-radius:5px!important;padding:.48rem 1rem!important;}
+.nav-wa:hover{opacity:.9!important;transform:translateY(-1px);}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem;}
+.ham span{width:23px;height:2px;background:var(--ink);border-radius:2px;transition:all .3s;}
+
+/* ═══════════════════════════════════════
+   LAYOUT HELPERS
+═══════════════════════════════════════ */
+.wrap{max-width:1240px;margin:0 auto;padding:0 2rem;}
+section.sec{padding:5.5rem 2rem;}
+.sh{margin-bottom:3.2rem;}
+.sh.center{text-align:center;}
+.sh.center .sub{margin:0 auto;}
+.eyebrow{font-family:'Cormorant Garamond',serif;font-size:.82rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;display:flex;align-items:center;gap:.6rem;}
+.eyebrow::before,.eyebrow::after{content:'';flex:1;height:1px;background:var(--gold);max-width:36px;}
+.sh.center .eyebrow{justify-content:center;}
+.sh.center .eyebrow::before,.sh.center .eyebrow::after{max-width:28px;}
+h2.title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:.9rem;}
+h2.title.white{color:#fff;}
+.sub{font-size:.96rem;color:var(--ink-muted);max-width:520px;line-height:1.85;}
+.sub.white{color:rgba(255,255,255,.5);}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.up{opacity:1;transform:translateY(0);}
+
+/* ═══════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════ */
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.82rem 1.8rem;border-radius:6px;font-weight:700;font-size:.79rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:transform .2s,box-shadow .2s,background .2s,opacity .2s;cursor:pointer;border:none;}
+.btn:hover{transform:translateY(-3px);}
+.btn-dark{background:var(--ink);color:#fff;}
+.btn-dark:hover{background:var(--navy);box-shadow:0 10px 24px rgba(26,23,20,.2);}
+.btn-gold{background:var(--gold);color:var(--ink);}
+.btn-gold:hover{background:var(--gold-lt);box-shadow:0 10px 24px rgba(154,123,60,.3);}
+.btn-gold-out{background:transparent;color:var(--gold);border:1.5px solid var(--gold);}
+.btn-gold-out:hover{background:var(--gold-bg);}
+.btn-white-out{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3);}
+.btn-white-out:hover{border-color:#fff;}
+.btn-wa{background:var(--green);color:#fff;}
+.btn-wa:hover{opacity:.9;box-shadow:0 10px 24px rgba(37,211,102,.35);}
+.btn-wa-sm{display:inline-flex;align-items:center;gap:.45rem;background:rgba(37,211,102,.1);color:var(--green);border:1px solid rgba(37,211,102,.22);border-radius:6px;padding:.55rem 1.1rem;font-size:.76rem;font-weight:700;letter-spacing:.08em;text-decoration:none;transition:background .2s,transform .2s;cursor:pointer;}
+.btn-wa-sm:hover{background:rgba(37,211,102,.2);transform:translateY(-2px);}
+.arrow-link{font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;transition:gap .2s;cursor:pointer;}
+.arrow-link::after{content:'→';}
+.arrow-link:hover{gap:.75rem;}
+
+/* ═══════════════════════════════════════
+   CARDS
+═══════════════════════════════════════ */
+.card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:2rem;transition:transform .3s,box-shadow .3s,border-color .3s;}
+.card:hover{transform:translateY(-5px);box-shadow:var(--sh-md);}
+.card-top-line::before{content:'';display:block;height:3px;width:100%;background:linear-gradient(90deg,var(--gold),var(--gold-lt));transform:scaleX(0);transform-origin:left;transition:transform .3s;margin-bottom:1.8rem;border-radius:2px;}
+.card-top-line:hover::before{transform:scaleX(1);}
+.card-dark{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);}
+.card-dark:hover{background:rgba(255,255,255,.07);border-color:rgba(201,168,76,.25);}
+.card-dark::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold-lt),transparent);opacity:0;transition:opacity .3s;}
+.card-dark:hover::after{opacity:1;}
+
+/* ═══════════════════════════════════════
+   ─── PAGE: INICIO ───
+═══════════════════════════════════════ */
+#page-inicio .hero-wrap{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;min-height:88vh;align-items:center;gap:4rem;padding:5rem 2rem 4rem;}
+.hero-badge{display:inline-flex;align-items:center;gap:.55rem;background:var(--gold-bg);border:1px solid rgba(154,123,60,.2);border-radius:30px;padding:.32rem 1rem;font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.8rem;}
+.hero-badge::before{content:'●';font-size:.45rem;}
+h1.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3.2rem,7vw,5.5rem);font-weight:900;line-height:1.05;color:var(--ink);}
+h1.hero-title em{font-style:italic;color:var(--gold);display:block;}
+.hero-rule{width:56px;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-lt));margin:1.8rem 0;border-radius:2px;}
+.hero-desc{font-size:1rem;color:var(--ink-muted);line-height:1.9;max-width:440px;}
+.hero-owner{font-family:'Cormorant Garamond',serif;font-size:.88rem;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-top:.9rem;}
+.hero-btns{display:flex;gap:.9rem;flex-wrap:wrap;margin-top:2.2rem;}
+/* right panel */
+.hero-panel{background:var(--ink);border-radius:16px;padding:2.8rem 2.2rem;position:relative;overflow:hidden;}
+.hero-panel::before{content:'';position:absolute;top:-70px;right:-70px;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.12),transparent 70%);}
+.panel-logo{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:900;color:#fff;margin-bottom:.35rem;}
+.panel-logo span{color:var(--gold-lt);}
+.panel-sub{font-family:'Cormorant Garamond',serif;font-size:.9rem;color:rgba(255,255,255,.45);letter-spacing:.18em;text-transform:uppercase;margin-bottom:2rem;}
+.ps-item{display:flex;align-items:center;gap:.85rem;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.ps-item:last-child{border:none;}
+.ps-ico{width:34px;height:34px;border-radius:8px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.18);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+.ps-name{font-size:.8rem;font-weight:700;color:#fff;letter-spacing:.03em;}
+.ps-hint{font-size:.7rem;color:rgba(255,255,255,.4);margin-top:.08rem;}
+.panel-wa{margin-top:1.8rem;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;gap:.65rem;padding:.85rem;border-radius:8px;text-decoration:none;font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;transition:transform .2s,box-shadow .2s;cursor:pointer;}
+.panel-wa:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(37,211,102,.35);}
+
+/* Servicios rápidos en inicio */
+.inicio-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.2rem;}
+.ic{background:var(--white);border:1px solid var(--rule);border-radius:12px;padding:1.8rem 1.5rem;text-align:center;cursor:pointer;transition:transform .3s,box-shadow .3s,border-color .3s;position:relative;overflow:hidden;}
+.ic::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-lt));transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.ic:hover{transform:translateY(-5px);box-shadow:var(--sh-md);border-color:rgba(154,123,60,.25);}
+.ic:hover::before{transform:scaleX(1);}
+.ic-icon{font-size:2rem;margin-bottom:.9rem;display:block;}
+.ic-name{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:.4rem;}
+.ic-hint{font-size:.78rem;color:var(--ink-muted);line-height:1.6;}
+.ic-arrow{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-top:.9rem;display:block;}
+
+/* stats bar */
+.stats-bar{background:var(--gold-bg);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:1.8rem;}
+.stats-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;text-align:center;}
+.stat-n{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--ink);}
+.stat-l{font-size:.72rem;color:var(--ink-muted);letter-spacing:.15em;text-transform:uppercase;margin-top:.2rem;}
+
+/* ═══════════════════════════════════════
+   ─── PAGE: PAPELERÍA ───
+═══════════════════════════════════════ */
+.paper-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.2rem;}
+.paper-card{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:1.9rem 1.4rem;text-align:center;cursor:default;transition:transform .3s,box-shadow .3s,border-color .3s;position:relative;overflow:hidden;}
+.paper-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-lt));transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.paper-card:hover{transform:translateY(-5px);box-shadow:var(--sh-md);border-color:rgba(154,123,60,.25);}
+.paper-card:hover::before{transform:scaleX(1);}
+.p-icon{font-size:1.9rem;margin-bottom:.9rem;display:block;}
+.p-name{font-family:'Playfair Display',serif;font-size:.93rem;font-weight:700;color:var(--ink);margin-bottom:.4rem;}
+.p-desc{font-size:.78rem;color:var(--ink-muted);line-height:1.7;}
+
+/* ═══════════════════════════════════════
+   ─── PAGE: TÉCNICO ───
+═══════════════════════════════════════ */
+#page-tech{background:var(--white);}
+.tech-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.4rem;}
+.tech-card{border:1px solid var(--rule);border-radius:12px;padding:2.1rem;background:var(--card);transition:transform .3s,box-shadow .3s,border-color .3s;display:flex;flex-direction:column;}
+.tech-card:hover{transform:translateY(-5px);box-shadow:var(--sh-md);border-color:rgba(27,107,138,.22);}
+.tc-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:rgba(26,23,20,.06);line-height:1;margin-bottom:.9rem;}
+.tc-ico{width:48px;height:48px;background:var(--cream);border:1px solid var(--rule);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.35rem;margin-bottom:1.1rem;}
+.tc-title{font-family:'Playfair Display',serif;font-size:1.02rem;font-weight:700;color:var(--ink);margin-bottom:.55rem;}
+.tc-desc{font-size:.81rem;color:var(--ink-muted);line-height:1.8;flex:1;margin-bottom:1.4rem;}
+
+/* ═══════════════════════════════════════
+   ─── PAGE: LICENCIAS ───
+═══════════════════════════════════════ */
+#page-licencias{background:var(--ink);}
+.lic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:1.4rem;}
+.lic-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:2.1rem;transition:transform .3s,background .3s,border-color .3s;position:relative;overflow:hidden;}
+.lic-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold-lt),transparent);opacity:0;transition:opacity .3s;}
+.lic-card:hover{transform:translateY(-5px);background:rgba(255,255,255,.07);border-color:rgba(201,168,76,.25);}
+.lic-card:hover::after{opacity:1;}
+.lic-badge{font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:.22rem .75rem;border-radius:20px;background:rgba(201,168,76,.15);color:var(--gold-lt);display:inline-block;margin-bottom:1.1rem;}
+.lic-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:#fff;margin-bottom:.45rem;}
+.lic-desc{font-size:.8rem;color:rgba(255,255,255,.48);line-height:1.75;margin-bottom:1.1rem;}
+.lic-list{list-style:none;margin-bottom:1.7rem;}
+.lic-list li{font-size:.78rem;color:rgba(255,255,255,.62);padding:.28rem 0;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid rgba(255,255,255,.05);}
+.lic-list li:last-child{border:none;}
+.lic-list li::before{content:'✦';color:var(--gold-lt);font-size:.55rem;flex-shrink:0;}
+
+/* ═══════════════════════════════════════
+   ─── PAGE: COTIZACIÓN ───
+═══════════════════════════════════════ */
+#page-cot{background:var(--cream);}
+.cot-wrap{max-width:860px;margin:0 auto;}
+.cot-form{background:var(--white);border:1px solid var(--rule);border-radius:18px;padding:3rem;box-shadow:var(--sh-md);}
+.form-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.5rem;padding-bottom:1.4rem;border-bottom:1px solid var(--rule);}
+.form-header-left h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--ink);}
+.form-header-left p{font-size:.8rem;color:var(--ink-muted);margin-top:.2rem;}
+.form-header-dots{display:flex;gap:.4rem;}
+.fh-dot{width:10px;height:10px;border-radius:50%;background:var(--rule);}
+.fh-dot:nth-child(2){background:var(--gold-lt);}
+.fh-dot:nth-child(3){background:var(--green);}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;}
+.fg-full{grid-column:1/-1;}
+.field{display:flex;flex-direction:column;gap:.45rem;}
+.field label{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted);}
+.field input,.field select,.field textarea{border:1.5px solid var(--rule);border-radius:8px;padding:.75rem 1rem;font-size:.88rem;color:var(--ink);background:var(--cream);font-family:'Lato',sans-serif;transition:border-color .2s,box-shadow .2s;outline:none;width:100%;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(154,123,60,.1);}
+.field textarea{resize:vertical;min-height:100px;}
+.field select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239A7B3C' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;}
+.presupuesto-group{display:flex;gap:.6rem;flex-wrap:wrap;}
+.pres-btn{padding:.5rem 1rem;border:1.5px solid var(--rule);border-radius:6px;font-size:.78rem;font-weight:700;color:var(--ink-mid);background:var(--cream);cursor:pointer;transition:border-color .2s,background .2s,color .2s;}
+.pres-btn:hover,.pres-btn.selected{border-color:var(--gold);background:var(--gold-bg);color:var(--gold);}
+.form-divider{grid-column:1/-1;height:1px;background:var(--rule);margin:.4rem 0;}
+.form-notice{font-size:.76rem;color:var(--ink-muted);display:flex;align-items:flex-start;gap:.5rem;line-height:1.6;}
+.form-notice::before{content:'ℹ';font-size:.9rem;color:var(--gold);flex-shrink:0;}
+.btn-submit{width:100%;padding:1.1rem;border:none;border-radius:10px;background:var(--green);color:#fff;font-family:'Lato',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.7rem;transition:transform .2s,box-shadow .2s,opacity .2s;margin-top:.5rem;}
+.btn-submit:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(37,211,102,.4);}
+.btn-submit svg{width:20px;height:20px;fill:#fff;flex-shrink:0;}
+/* progress */
+.form-progress{margin-bottom:2rem;}
+.fp-bar{height:4px;background:var(--rule);border-radius:3px;overflow:hidden;}
+.fp-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-lt));border-radius:3px;transition:width .4s ease;}
+.fp-label{font-size:.7rem;color:var(--ink-muted);margin-top:.4rem;text-align:right;}
+
+/* success state */
+.form-success{display:none;text-align:center;padding:4rem 2rem;}
+.form-success.show{display:block;}
+.form-success .success-icon{font-size:4rem;margin-bottom:1.2rem;}
+.form-success h3{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--ink);margin-bottom:.7rem;}
+.form-success p{font-size:.92rem;color:var(--ink-muted);line-height:1.8;max-width:400px;margin:0 auto 2rem;}
+
+/* ═══════════════════════════════════════
+   ─── PAGE: WEB ───
+═══════════════════════════════════════ */
+#page-web{background:var(--white);}
+.web-hero{background:var(--ink);border-radius:20px;padding:4rem;margin-bottom:3.5rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;overflow:hidden;}
+.web-hero::before{content:'</>';position:absolute;right:3%;top:50%;transform:translateY(-50%);font-family:'Cormorant Garamond',serif;font-size:12rem;font-weight:700;color:rgba(255,255,255,.022);line-height:1;pointer-events:none;}
+.wh-eyebrow{font-family:'Cormorant Garamond',serif;font-size:.82rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:.7rem;}
+.wh-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:900;color:#fff;line-height:1.15;margin-bottom:.9rem;}
+.wh-title em{font-style:italic;color:var(--gold-lt);}
+.wh-desc{font-size:.91rem;color:rgba(255,255,255,.5);line-height:1.85;margin-bottom:1.8rem;}
+.code-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:1.8rem;}
+.cb-header{display:flex;align-items:center;gap:.45rem;margin-bottom:1.4rem;}
+.cb-dot{width:8px;height:8px;border-radius:50%;}
+.cb-dot:nth-child(1){background:#ff5f57;}
+.cb-dot:nth-child(2){background:#febc2e;}
+.cb-dot:nth-child(3){background:#28c840;}
+.cl{font-family:monospace;font-size:.76rem;color:rgba(255,255,255,.28);padding:.22rem 0;display:flex;align-items:center;gap:.55rem;}
+.cl.a{color:rgba(255,255,255,.82);}
+.ct{color:#c678dd;}.ca{color:#61afef;}.cv{color:#98c379;}
+.c-cur{width:2px;height:13px;background:var(--gold-lt);animation:blink .9s infinite;display:inline-block;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.pkg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:1.4rem;margin-bottom:3.5rem;}
+.pkg{border:1px solid var(--rule);border-radius:14px;padding:2.1rem;background:var(--card);position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s;}
+.pkg.featured{border-color:var(--gold);box-shadow:0 0 0 3px rgba(154,123,60,.08);}
+.pkg:hover{transform:translateY(-5px);box-shadow:var(--sh-md);}
+.pkg-badge{position:absolute;top:0;right:0;background:var(--gold);color:var(--ink);font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.28rem .85rem;border-radius:0 14px 0 10px;}
+.pkg-plan{font-family:'Cormorant Garamond',serif;font-size:.82rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;}
+.pkg-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--ink);margin-bottom:.7rem;}
+.pkg-desc{font-size:.78rem;color:var(--ink-muted);line-height:1.7;margin-bottom:1.2rem;}
+.pkg-list{list-style:none;margin-bottom:1.7rem;}
+.pkg-list li{font-size:.78rem;color:var(--ink-mid);padding:.28rem 0;display:flex;align-items:flex-start;gap:.45rem;border-bottom:1px solid var(--rule);}
+.pkg-list li:last-child{border:none;}
+.pkg-list li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0;margin-top:.05rem;}
+.pkg-cta{display:block;text-align:center;background:var(--ink);color:#fff;padding:.78rem;border-radius:7px;font-weight:700;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:background .2s,transform .2s;cursor:pointer;}
+.pkg-cta:hover{background:var(--navy);transform:translateY(-2px);}
+.pkg.featured .pkg-cta{background:var(--gold);color:var(--ink);}
+.pkg.featured .pkg-cta:hover{background:var(--gold-lt);}
+.proc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:1.4rem;}
+.proc{text-align:center;}
+.proc-ico{width:52px;height:52px;border-radius:50%;background:var(--white);border:2px solid var(--rule);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin:0 auto .9rem;}
+.proc-name{font-family:'Playfair Display',serif;font-size:.85rem;font-weight:700;color:var(--ink);margin-bottom:.28rem;}
+.proc-desc{font-size:.74rem;color:var(--ink-muted);line-height:1.6;}
+
+/* ═══════════════════════════════════════
+   ─── PAGE: CONTACTO ───
+═══════════════════════════════════════ */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:1.2rem;margin-bottom:3.2rem;}
+.cc{background:var(--white);border:1px solid var(--rule);border-radius:12px;padding:1.7rem;transition:transform .3s,box-shadow .3s,border-color .3s;}
+.cc:hover{transform:translateY(-5px);box-shadow:var(--sh-md);border-color:rgba(154,123,60,.22);}
+.cc-ico{font-size:1.7rem;margin-bottom:.75rem;display:block;}
+.cc-lbl{font-size:.66rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:.28rem;}
+.cc-val{font-family:'Playfair Display',serif;font-size:.88rem;color:var(--ink);}
+.wa-big{display:inline-flex;align-items:center;gap:.8rem;background:var(--green);color:#fff;padding:1.1rem 2.8rem;border-radius:50px;font-weight:700;font-size:.88rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:transform .25s,box-shadow .25s;box-shadow:0 8px 24px rgba(37,211,102,.3);cursor:pointer;}
+.wa-big:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 16px 40px rgba(37,211,102,.4);}
+.wa-big svg{width:21px;height:21px;fill:#fff;flex-shrink:0;}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer{background:var(--ink);color:rgba(255,255,255,.5);padding:3.5rem 2rem 1.8rem;}
+.foot-inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.07);}
+.foot-logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:#fff;margin-bottom:.35rem;}
+.foot-logo span{color:var(--gold-lt);}
+.foot-motto{font-family:'Cormorant Garamond',serif;font-size:.85rem;color:rgba(255,255,255,.32);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem;}
+.foot-about{font-size:.78rem;line-height:1.8;color:rgba(255,255,255,.38);}
+.foot-col-title{font-family:'Playfair Display',serif;font-size:.8rem;font-weight:700;color:#fff;letter-spacing:.07em;margin-bottom:1.1rem;}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
+.foot-links a{font-size:.78rem;color:rgba(255,255,255,.42);text-decoration:none;transition:color .2s;cursor:pointer;}
+.foot-links a:hover{color:var(--gold-lt);}
+.foot-bottom{max-width:1240px;margin:0 auto;padding-top:1.6rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem;}
+.foot-copy{font-size:.72rem;color:rgba(255,255,255,.28);}
+.foot-copy strong{color:var(--gold-lt);}
+
+/* ═══════════════════════════════════════
+   FLOATING WA
+═══════════════════════════════════════ */
+.wa-float{position:fixed;bottom:2rem;right:2rem;z-index:5000;display:flex;flex-direction:column;align-items:flex-end;gap:.65rem;}
+.wa-float-btn{width:56px;height:56px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 8px 24px rgba(37,211,102,.44);transition:transform .25s,box-shadow .25s;position:relative;}
+.wa-float-btn:hover{transform:scale(1.1);box-shadow:0 12px 32px rgba(37,211,102,.55);}
+.wa-float-btn svg{width:25px;height:25px;fill:#fff;}
+.wa-pulse{position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(37,211,102,.38);animation:waPulse 2.2s ease-out infinite;}
+.wa-pulse:nth-child(2){animation-delay:.7s;}
+@keyframes waPulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.65);opacity:0}}
+.wa-tip{background:var(--ink);color:#fff;font-size:.73rem;font-weight:700;padding:.4rem .85rem;border-radius:7px;white-space:nowrap;opacity:0;transform:translateX(8px);transition:opacity .3s,transform .3s;pointer-events:none;border:1px solid rgba(255,255,255,.07);}
+.wa-float:hover .wa-tip{opacity:1;transform:translateX(0);}
+
+/* ═══════════════════════════════════════
+   PAGE HERO BANNERS (inner pages)
+═══════════════════════════════════════ */
+.page-banner{background:var(--navy);padding:4rem 2rem 3.5rem;text-align:center;}
+.page-banner .eyebrow{justify-content:center;color:rgba(255,255,255,.45);}
+.page-banner .eyebrow::before,.page-banner .eyebrow::after{background:rgba(255,255,255,.2);}
+.page-banner h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:#fff;margin-bottom:.7rem;}
+.page-banner h2 em{font-style:italic;color:var(--gold-lt);}
+.page-banner p{font-size:.95rem;color:rgba(255,255,255,.5);max-width:480px;margin:0 auto;}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:920px){
+  nav ul{display:none;}
+  .ham{display:flex;}
+  nav ul.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--white);padding:1.2rem 1.5rem;gap:.3rem;border-bottom:1px solid var(--rule);box-shadow:var(--sh-md);}
+  #page-inicio .hero-wrap{grid-template-columns:1fr;min-height:auto;padding:4rem 2rem 3rem;gap:2.5rem;}
+  .hero-panel{display:none;}
+  .stats-inner{grid-template-columns:repeat(2,1fr);}
+  .web-hero{grid-template-columns:1fr;padding:2.5rem;}
+  .web-hero::before{display:none;}
+  .foot-inner{grid-template-columns:1fr 1fr;}
+  section.sec{padding:4rem 1.5rem;}
+  .form-grid{grid-template-columns:1fr;}
+}
+@media(max-width:560px){
+  .stats-inner{grid-template-columns:1fr 1fr;}
+  .foot-inner{grid-template-columns:1fr;}
+  .foot-bottom{flex-direction:column;text-align:center;}
+  .cot-form{padding:2rem 1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="https://wa.me/573132755360" target="_blank">📱 +57 313 275 5360</a>
+  <span class="sep">|</span>
+  <a onclick="nav('contacto')">📍 Bogotá, Colombia</a>
+  <span class="sep">|</span>
+  <a onclick="nav('tech')">🛠 Servicios técnicos</a>
+  <span class="sep">|</span>
+  <a onclick="nav('web')">💻 Desarrollo web</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <div class="brand" onclick="nav('inicio')">
+      <div class="brand-emblem">
+        <svg viewBox="0 0 60 60"><path d="M30 8C24 5,16 8,12 16C9 22,11 26,9 30C7 34,3 35,5 38C7 41,13 40,15 38C17 36,18 34,20 35C22 36,23 39,25 41C27 43,30 42,30 41C30 42,33 43,35 41C37 39,38 36,40 35C42 34,43 36,45 38C47 40,53 41,55 38C57 35,53 34,51 30C49 26,51 22,48 16C44 8,36 5,30 8Z"/></svg>
+      </div>
+      <div>
+        <span class="brand-name">Cuervo Negro</span>
+        <span class="brand-sub">Papelería & Servicios · Bogotá</span>
+      </div>
+    </div>
+    <ul id="navMenu">
+      <li><a id="nl-inicio" onclick="nav('inicio')">Inicio</a></li>
+      <li><a id="nl-papeleria" onclick="nav('papeleria')">Papelería</a></li>
+      <li><a id="nl-tech" onclick="nav('tech')">Técnico</a></li>
+      <li><a id="nl-licencias" onclick="nav('licencias')">Licencias</a></li>
+      <li><a id="nl-cot" onclick="nav('cot')">Cotización</a></li>
+      <li><a id="nl-web" onclick="nav('web')">Páginas Web</a></li>
+      <li><a id="nl-contacto" onclick="nav('contacto')">Contacto</a></li>
+      <li><a class="nav-wa" href="https://wa.me/573132755360?text=Hola%20Cuervo%20Negro!%20Vi%20su%20página%20y%20quiero%20información." target="_blank">💬 WhatsApp</a></li>
+    </ul>
+    <div class="ham" id="ham"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     PAGE: INICIO
+══════════════════════════════════════ -->
+<div id="page-inicio" class="page active">
+  <div id="page-inicio" class="hero-wrap">
+    <div>
+      <div class="hero-badge">Bogotá, Colombia · Est. 2024</div>
+      <h1 class="hero-title">Papelería<br/><em>& Servicios<br/>Técnicos</em></h1>
+      <div class="hero-rule"></div>
+      <p class="hero-desc">Tu papelería de confianza y tu técnico de sistemas en un solo lugar. Suministros escolares, mantenimiento de equipos, licencias originales y desarrollo web profesional.</p>
+      <p class="hero-owner">Juan Camilo Cruz Téllez — Técnico en Sistemas</p>
+      <div class="hero-btns">
+        <button class="btn btn-dark" onclick="nav('tech')">🛠 Servicios Técnicos</button>
+        <button class="btn btn-gold-out" onclick="nav('web')">💻 Páginas Web</button>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <p class="panel-logo">Cuervo<span>Negro</span></p>
+      <p class="panel-sub">Papelería & Servicios · Bogotá</p>
+      <div class="ps-item"><div class="ps-ico">📓</div><div><p class="ps-name">Papelería Completa</p><p class="ps-hint">Útiles, impresiones y suministros</p></div></div>
+      <div class="ps-item"><div class="ps-ico">🔧</div><div><p class="ps-name">Mantenimiento de PC</p><p class="ps-hint">Diagnóstico, limpieza, reparación</p></div></div>
+      <div class="ps-item"><div class="ps-ico">🔑</div><div><p class="ps-name">Licencias Originales</p><p class="ps-hint">Windows, Office y más software</p></div></div>
+      <div class="ps-item"><div class="ps-ico">🌐</div><div><p class="ps-name">Desarrollo Web</p><p class="ps-hint">Páginas profesionales a medida</p></div></div>
+      <a class="panel-wa" href="https://wa.me/573132755360?text=Hola!%20Quiero%20información%20sobre%20sus%20servicios." target="_blank">
+        <svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.118.553 4.107 1.523 5.836L.057 23.999l6.304-1.44A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.773 9.773 0 01-4.988-1.365l-.358-.213-3.713.848.879-3.614-.234-.371A9.775 9.775 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        Escribir al WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div><p class="stat-n">100%</p><p class="stat-l">Satisfacción</p></div>
+      <div><p class="stat-n">24h</p><p class="stat-l">Respuesta</p></div>
+      <div><p class="stat-n">7+</p><p class="stat-l">Servicios</p></div>
+      <div><p class="stat-n">Bog</p><p class="stat-l">Bogotá · COL</p></div>
+    </div>
+  </div>
+
+  <!-- Tarjetas de servicios -->
+  <section class="sec" style="background:var(--cream);">
+    <div class="wrap">
+      <div class="sh center">
+        <p class="eyebrow">Nuestros servicios</p>
+        <h2 class="title">¿En qué podemos ayudarte?</h2>
+        <p class="sub" style="margin:0 auto;">Haz clic en cualquier servicio para ver todos los detalles.</p>
+      </div>
+      <div class="inicio-cards">
+        <div class="ic" onclick="nav('papeleria')">
+          <span class="ic-icon">📓</span>
+          <p class="ic-name">Papelería</p>
+          <p class="ic-hint">Útiles, impresiones, suministros escolares y de oficina.</p>
+          <span class="ic-arrow">Ver productos →</span>
+        </div>
+        <div class="ic" onclick="nav('tech')">
+          <span class="ic-icon">🔧</span>
+          <p class="ic-name">Técnico de Sistemas</p>
+          <p class="ic-hint">Mantenimiento, diagnóstico, formateo y más.</p>
+          <span class="ic-arrow">Ver servicios →</span>
+        </div>
+        <div class="ic" onclick="nav('licencias')">
+          <span class="ic-icon">🔑</span>
+          <p class="ic-name">Licencias de Software</p>
+          <p class="ic-hint">Windows, Office y software original con soporte.</p>
+          <span class="ic-arrow">Ver licencias →</span>
+        </div>
+        <div class="ic" onclick="nav('cot')">
+          <span class="ic-icon">💻</span>
+          <p class="ic-name">Cotización de Equipos</p>
+          <p class="ic-hint">Arma o compra tu PC ideal con asesoría gratuita.</p>
+          <span class="ic-arrow">Cotizar ahora →</span>
+        </div>
+        <div class="ic" onclick="nav('web')">
+          <span class="ic-icon">🌐</span>
+          <p class="ic-name">Páginas Web</p>
+          <p class="ic-hint">Diseño y desarrollo web profesional a medida.</p>
+          <span class="ic-arrow">Ver planes →</span>
+        </div>
+        <div class="ic" onclick="nav('contacto')">
+          <span class="ic-icon">📍</span>
+          <p class="ic-name">Contáctanos</p>
+          <p class="ic-hint">Estamos en Bogotá. Escríbenos y respondemos rápido.</p>
+          <span class="ic-arrow">Contactar →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: PAPELERÍA
+══════════════════════════════════════ -->
+<div id="page-papeleria" class="page">
+  <div class="page-banner">
+    <p class="eyebrow">Nuestros productos</p>
+    <h2>Papelería &amp; <em>Suministros</em></h2>
+    <p>Todo lo que necesitas para estudiar, crear y trabajar. Calidad garantizada a precios honestos en Bogotá.</p>
+  </div>
+  <section class="sec" style="background:var(--cream);">
+    <div class="wrap">
+      <div class="paper-grid">
+        <div class="paper-card"><span class="p-icon">📓</span><p class="p-name">Cuadernos & Libretas</p><p class="p-desc">Universitarios, de notas, agendas y más para toda ocasión.</p></div>
+        <div class="paper-card"><span class="p-icon">✏️</span><p class="p-name">Útiles Escolares</p><p class="p-desc">Lápices, colores, marcadores, resaltadores y todo para estudiar.</p></div>
+        <div class="paper-card"><span class="p-icon">🖨️</span><p class="p-name">Impresión & Fotocopias</p><p class="p-desc">Color y B/N, laminados, plastificados y encuadernados.</p></div>
+        <div class="paper-card"><span class="p-icon">📎</span><p class="p-name">Suministros de Oficina</p><p class="p-desc">Carpetas, archivadores, clips, grapadoras y material de oficina.</p></div>
+        <div class="paper-card"><span class="p-icon">🎨</span><p class="p-name">Manualidades</p><p class="p-desc">Cartulina, foamy, papel especial, pegantes y materiales creativos.</p></div>
+        <div class="paper-card"><span class="p-icon">💳</span><p class="p-name">Recargas & Servicios</p><p class="p-desc">Recargas de celular, pago de facturas y trámites básicos.</p></div>
+      </div>
+      <div style="text-align:center;margin-top:3rem;">
+        <a class="btn btn-dark" href="https://wa.me/573132755360?text=Hola!%20Quiero%20información%20sobre%20los%20productos%20de%20papelería." target="_blank">💬 Consultar disponibilidad</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: TÉCNICO
+══════════════════════════════════════ -->
+<div id="page-tech" class="page">
+  <div class="page-banner">
+    <p class="eyebrow">Técnico certificado</p>
+    <h2>Servicios <em>Técnicos</em></h2>
+    <p>Soluciones reales para tus equipos. Diagnóstico preciso, trabajo profesional y precios justos en Bogotá.</p>
+  </div>
+  <section class="sec" style="background:var(--white);">
+    <div class="wrap">
+      <div class="tech-grid">
+        <div class="tech-card"><p class="tc-num">01</p><div class="tc-ico">🧹</div><p class="tc-title">Limpieza & Mantenimiento</p><p class="tc-desc">Mantenimiento preventivo y correctivo de PC y laptops. Limpieza de polvo, cambio de pasta térmica, revisión de componentes para mejorar rendimiento y vida útil del equipo.</p><a class="arrow-link" href="https://wa.me/573132755360?text=Hola!%20Necesito%20mantenimiento%20para%20mi%20equipo." target="_blank">Solicitar servicio</a></div>
+        <div class="tech-card"><p class="tc-num">02</p><div class="tc-ico">🔧</div><p class="tc-title">Diagnóstico de Hardware</p><p class="tc-desc">Detección de fallas en componentes: RAM, disco duro, tarjeta de video, fuente de poder y placa base. Informe técnico con recomendaciones y presupuesto de reparación.</p><a class="arrow-link" href="https://wa.me/573132755360?text=Hola!%20Mi%20equipo%20tiene%20fallas%20y%20necesito%20diagnóstico." target="_blank">Solicitar diagnóstico</a></div>
+        <div class="tech-card"><p class="tc-num">03</p><div class="tc-ico">💻</div><p class="tc-title">Problemas de Software</p><p class="tc-desc">Solución de errores del sistema, lentitud, pantallazos azules (BSOD), instalación de controladores y configuración completa del sistema operativo Windows.</p><a class="arrow-link" href="https://wa.me/573132755360?text=Hola!%20Tengo%20problemas%20de%20software%20en%20mi%20equipo." target="_blank">Resolver problema</a></div>
+        <div class="tech-card"><p class="tc-num">04</p><div class="tc-ico">🦠</div><p class="tc-title">Eliminación de Virus</p><p class="tc-desc">Remoción completa de malware, spyware y adware. Instalación y configuración de antivirus. Recuperación de archivos dañados o cifrados por ransomware.</p><a class="arrow-link" href="https://wa.me/573132755360?text=Hola!%20Creo%20que%20mi%20PC%20tiene%20virus." target="_blank">Limpiar equipo</a></div>
+        <div class="tech-card"><p class="tc-num">05</p><div class="tc-ico">⚡</div><p class="tc-title">Optimización de PC</p><p class="tc-desc">Acelera tu equipo: limpieza de archivos temporales, optimización de inicio, tweaks de rendimiento para gaming, diseño o trabajo de oficina.</p><a class="arrow-link" href="https://wa.me/573132755360?text=Hola!%20Quiero%20optimizar%20mi%20PC." target="_blank">Optimizar ahora</a></div>
+        <div class="tech-card"><p class="tc-num">06</p><div class="tc-ico">🛠</div><p class="tc-title">Formateo & Reinstalación</p><p class="tc-desc">Formateo completo con respaldo de datos, instalación limpia de Windows 10/11, controladores y software esencial. Tu equipo como nuevo, garantizado.</p><a class="arrow-link" href="https://wa.me/573132755360?text=Hola!%20Necesito%20formatear%20mi%20PC." target="_blank">Formatear equipo</a></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: LICENCIAS
+══════════════════════════════════════ -->
+<div id="page-licencias" class="page">
+  <div class="page-banner">
+    <p class="eyebrow">Software original</p>
+    <h2>Licencias &amp; <em>Software</em></h2>
+    <p>Trabaja y estudia con software legítimo. Activación inmediata y soporte incluido.</p>
+  </div>
+  <section class="sec" style="background:var(--ink);">
+    <div class="wrap">
+      <div class="lic-grid">
+        <div class="lic-card"><span class="lic-badge">Microsoft Windows</span><p class="lic-title">Windows 10 / 11</p><p class="lic-desc">Licencias originales para Home y Pro. Activación inmediata con acompañamiento.</p><ul class="lic-list"><li>Windows 10 Home & Pro</li><li>Windows 11 Home & Pro</li><li>Instalación limpia disponible</li><li>Activación garantizada</li><li>Soporte post-instalación</li></ul><a class="btn-wa-sm" href="https://wa.me/573132755360?text=Hola!%20Quiero%20cotizar%20licencia%20de%20Windows." target="_blank">💬 Cotizar</a></div>
+        <div class="lic-card"><span class="lic-badge">Microsoft Office</span><p class="lic-title">Office 365 / 2021</p><p class="lic-desc">Suite ofimática completa. Word, Excel, PowerPoint y más para trabajo y estudio.</p><ul class="lic-list"><li>Microsoft 365 Personal</li><li>Microsoft 365 Family</li><li>Office 2021 Home & Business</li><li>Office 2021 Professional</li><li>Activación y soporte incluido</li></ul><a class="btn-wa-sm" href="https://wa.me/573132755360?text=Hola!%20Quiero%20cotizar%20licencia%20de%20Office." target="_blank">💬 Cotizar</a></div>
+        <div class="lic-card"><span class="lic-badge">Software General</span><p class="lic-title">Otros Programas</p><p class="lic-desc">Antivirus, utilidades y programas esenciales para mantener tu equipo seguro.</p><ul class="lic-list"><li>Kaspersky / ESET / Bitdefender</li><li>WinRAR, 7-Zip, Adobe Reader</li><li>VLC, CCleaner y utilidades</li><li>Consulta cualquier programa</li><li>Instalación incluida</li></ul><a class="btn-wa-sm" href="https://wa.me/573132755360?text=Hola!%20Necesito%20información%20sobre%20software." target="_blank">💬 Consultar</a></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: COTIZACIÓN ← FORM INTERACTIVO
+══════════════════════════════════════ -->
+<div id="page-cot" class="page">
+  <div class="page-banner">
+    <p class="eyebrow">Asesoría gratuita</p>
+    <h2>Cotiza tu <em>Equipo Ideal</em></h2>
+    <p>Llena el formulario y lo recibiremos directamente por WhatsApp. Respondemos con tu cotización personalizada.</p>
+  </div>
+  <section class="sec" style="background:var(--cream);">
+    <div class="wrap">
+      <div class="cot-wrap">
+        <!-- FORM -->
+        <div class="cot-form" id="cotForm">
+          <div class="form-header">
+            <div class="form-header-left">
+              <h3>Formulario de Cotización</h3>
+              <p>Completa los campos y envíanos tu solicitud vía WhatsApp</p>
+            </div>
+            <div class="form-header-dots"><div class="fh-dot"></div><div class="fh-dot"></div><div class="fh-dot"></div></div>
+          </div>
+
+          <!-- progress -->
+          <div class="form-progress">
+            <div class="fp-bar"><div class="fp-fill" id="fpFill" style="width:0%"></div></div>
+            <p class="fp-label" id="fpLabel">0 de 5 campos completados</p>
+          </div>
+
+          <div class="form-grid" id="theForm">
+            <!-- Nombre -->
+            <div class="field fg-full">
+              <label for="f-nombre">Tu nombre completo *</label>
+              <input type="text" id="f-nombre" placeholder="Ej: Carlos Rodríguez" oninput="updateProgress()"/>
+            </div>
+            <!-- Uso principal -->
+            <div class="field">
+              <label for="f-uso">Uso principal del equipo *</label>
+              <select id="f-uso" onchange="updateProgress()">
+                <option value="">Selecciona una opción...</option>
+                <option>Gaming / Juegos</option>
+                <option>Trabajo de oficina</option>
+                <option>Diseño gráfico / Edición</option>
+                <option>Estudio universitario</option>
+                <option>Uso general / Navegar</option>
+                <option>Programación / Desarrollo</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <!-- Tipo de equipo -->
+            <div class="field">
+              <label for="f-tipo">Tipo de equipo *</label>
+              <select id="f-tipo" onchange="updateProgress()">
+                <option value="">Selecciona una opción...</option>
+                <option>PC de escritorio (torre)</option>
+                <option>Laptop / Portátil</option>
+                <option>All-in-One</option>
+                <option>No lo tengo claro, necesito asesoría</option>
+              </select>
+            </div>
+            <!-- Presupuesto -->
+            <div class="field fg-full">
+              <label>Presupuesto aproximado (COP) *</label>
+              <div class="presupuesto-group" id="presGroup">
+                <button class="pres-btn" onclick="selectPres(this,'Menos de $800.000')">Menos de $800k</button>
+                <button class="pres-btn" onclick="selectPres(this,'$800.000 – $1.500.000')">$800k – $1.5M</button>
+                <button class="pres-btn" onclick="selectPres(this,'$1.500.000 – $2.500.000')">$1.5M – $2.5M</button>
+                <button class="pres-btn" onclick="selectPres(this,'$2.500.000 – $4.000.000')">$2.5M – $4M</button>
+                <button class="pres-btn" onclick="selectPres(this,'Más de $4.000.000')">Más de $4M</button>
+                <button class="pres-btn" onclick="selectPres(this,'Presupuesto flexible')">Flexible</button>
+              </div>
+              <input type="hidden" id="f-presupuesto"/>
+            </div>
+            <!-- Celular -->
+            <div class="field">
+              <label for="f-cel">Tu número de celular *</label>
+              <input type="tel" id="f-cel" placeholder="Ej: 3001234567" oninput="updateProgress()"/>
+            </div>
+            <!-- Ciudad -->
+            <div class="field">
+              <label for="f-ciudad">Ciudad</label>
+              <input type="text" id="f-ciudad" placeholder="Ej: Bogotá" oninput="updateProgress()"/>
+            </div>
+
+            <div class="form-divider"></div>
+
+            <!-- Especificaciones extras -->
+            <div class="field fg-full">
+              <label for="f-specs">Especificaciones o requisitos adicionales</label>
+              <textarea id="f-specs" placeholder="Cuéntanos más: ¿necesitas buena GPU?, ¿cuánta RAM quieres?, ¿tienes preferencia de marca?, ¿monitor incluido?..."></textarea>
+            </div>
+
+            <div class="fg-full">
+              <p class="form-notice">Cuando hagas clic en "Enviar cotización", abriremos WhatsApp con toda tu información lista para enviarnos. Responderemos con tu cotización personalizada en menos de 24 horas.</p>
+            </div>
+            <div class="fg-full">
+              <button class="btn-submit" onclick="enviarCotizacion()">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.118.553 4.107 1.523 5.836L.057 23.999l6.304-1.44A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.773 9.773 0 01-4.988-1.365l-.358-.213-3.713.848.879-3.614-.234-.371A9.775 9.775 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+                Enviar cotización por WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUCCESS STATE -->
+        <div class="form-success" id="cotSuccess">
+          <div class="success-icon">✅</div>
+          <h3>¡Listo! WhatsApp abierto</h3>
+          <p>Tu solicitud ya está lista para enviarse. Revisa WhatsApp, confirma el mensaje y envíalo. Te responderemos con tu cotización en menos de 24 horas.</p>
+          <button class="btn btn-dark" onclick="resetForm()">Hacer otra cotización</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: WEB
+══════════════════════════════════════ -->
+<div id="page-web" class="page">
+  <div class="page-banner">
+    <p class="eyebrow">Nuevo servicio</p>
+    <h2>Páginas Web <em>Profesionales</em></h2>
+    <p>Diseño y desarrollo de sitios web a medida para negocios, emprendedores y profesionales en Colombia.</p>
+  </div>
+  <section class="sec" style="background:var(--white);">
+    <div class="wrap">
+      <div class="web-hero">
+        <div>
+          <p class="wh-eyebrow">Presencia digital para tu negocio</p>
+          <h2 class="wh-title">Tu negocio merece<br/><em>estar en internet</em></h2>
+          <p class="wh-desc">¿Aún no tienes página web? O ¿la que tienes ya no te representa? Creamos sitios web atractivos, rápidos y funcionales que convierten visitantes en clientes. Con botón de WhatsApp incluido, por supuesto.</p>
+          <div style="display:flex;gap:.8rem;flex-wrap:wrap;">
+            <a class="btn btn-gold" href="https://wa.me/573132755360?text=Hola!%20Quiero%20información%20sobre%20el%20desarrollo%20de%20mi%20página%20web." target="_blank">💬 Pedir cotización</a>
+            <button class="btn btn-white-out" onclick="document.getElementById('web-planes').scrollIntoView({behavior:'smooth'})">Ver planes ↓</button>
+          </div>
+        </div>
+        <div class="code-box">
+          <div class="cb-header"><div class="cb-dot"></div><div class="cb-dot"></div><div class="cb-dot"></div><span style="font-size:.7rem;color:rgba(255,255,255,.28);margin-left:auto;">index.html</span></div>
+          <div class="cl"><span class="ct">&lt;!DOCTYPE</span> <span class="ca">html</span><span class="ct">&gt;</span></div>
+          <div class="cl a"><span class="ct">&lt;section</span> <span class="ca">id</span>=<span class="cv">"hero"</span><span class="ct">&gt;</span></div>
+          <div class="cl a" style="padding-left:1.5rem;"><span class="ct">&lt;h1&gt;</span><span style="color:#ffe28a;">Tu Negocio Online</span><span class="ct">&lt;/h1&gt;</span></div>
+          <div class="cl" style="padding-left:1.5rem;"><span class="ct">&lt;p&gt;</span><span style="color:rgba(255,255,255,.45);">Bogotá · Colombia</span><span class="ct">&lt;/p&gt;</span></div>
+          <div class="cl a"><span class="ct">&lt;button&gt;</span><span style="color:#98c379;">WhatsApp</span><span class="ct">&lt;/button&gt;</span><span class="c-cur"></span></div>
+          <div class="cl"><span class="ct">&lt;/section&gt;</span></div>
+          <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.06);display:flex;gap:.45rem;flex-wrap:wrap;">
+            <span style="font-size:.64rem;background:rgba(255,255,255,.06);color:rgba(255,255,255,.45);padding:.18rem .6rem;border-radius:4px;">HTML5</span>
+            <span style="font-size:.64rem;background:rgba(255,255,255,.06);color:rgba(255,255,255,.45);padding:.18rem .6rem;border-radius:4px;">CSS3</span>
+            <span style="font-size:.64rem;background:rgba(255,255,255,.06);color:rgba(255,255,255,.45);padding:.18rem .6rem;border-radius:4px;">JavaScript</span>
+            <span style="font-size:.64rem;background:rgba(255,255,255,.06);color:rgba(255,255,255,.45);padding:.18rem .6rem;border-radius:4px;">WhatsApp API</span>
+            <span style="font-size:.64rem;background:rgba(255,255,255,.06);color:rgba(255,255,255,.45);padding:.18rem .6rem;border-radius:4px;">Mobile First</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="web-planes" style="margin-bottom:2rem;">
+        <p class="eyebrow" style="justify-content:flex-start;">Planes disponibles</p>
+        <h2 class="title">Elige tu Plan</h2>
+      </div>
+      <div class="pkg-grid">
+        <div class="pkg">
+          <p class="pkg-plan">Plan Básico</p>
+          <p class="pkg-title">Página Vitrina</p>
+          <p class="pkg-desc">Ideal para emprendedores que quieren presencia digital simple y efectiva.</p>
+          <ul class="pkg-list">
+            <li>Landing page de una sola página</li>
+            <li>Diseño responsive (móvil + PC)</li>
+            <li>Botón flotante de WhatsApp</li>
+            <li>Formulario de contacto</li>
+            <li>Sección de servicios</li>
+            <li>Hasta 3 secciones</li>
+          </ul>
+          <a class="pkg-cta" href="https://wa.me/573132755360?text=Hola!%20Quiero%20cotizar%20el%20Plan%20Básico%20de%20página%20web." target="_blank">💬 Cotizar este plan</a>
+        </div>
+        <div class="pkg featured">
+          <div class="pkg-badge">⭐ Más popular</div>
+          <p class="pkg-plan">Plan Estándar</p>
+          <p class="pkg-title">Sitio Completo</p>
+          <p class="pkg-desc">Para negocios que necesitan un sitio web completo y funcional.</p>
+          <ul class="pkg-list">
+            <li>Todo lo del Plan Básico</li>
+            <li>Múltiples páginas (hasta 6)</li>
+            <li>Galería de productos o servicios</li>
+            <li>Testimonios y reseñas</li>
+            <li>Blog integrado</li>
+            <li>Google Maps + redes sociales</li>
+            <li>SEO básico incluido</li>
+          </ul>
+          <a class="pkg-cta" href="https://wa.me/573132755360?text=Hola!%20Quiero%20cotizar%20el%20Plan%20Estándar%20de%20página%20web." target="_blank">💬 Cotizar este plan</a>
+        </div>
+        <div class="pkg">
+          <p class="pkg-plan">Plan Premium</p>
+          <p class="pkg-title">E-commerce & Pro</p>
+          <p class="pkg-desc">Tiendas virtuales y proyectos a medida con funcionalidades avanzadas.</p>
+          <ul class="pkg-list">
+            <li>Todo lo del Plan Estándar</li>
+            <li>Tienda virtual (e-commerce)</li>
+            <li>Carrito de compras y pagos</li>
+            <li>Panel de administración</li>
+            <li>Integraciones personalizadas</li>
+            <li>SEO avanzado y analíticas</li>
+            <li>Mantenimiento mensual</li>
+          </ul>
+          <a class="pkg-cta" href="https://wa.me/573132755360?text=Hola!%20Quiero%20cotizar%20el%20Plan%20Premium%20de%20página%20web." target="_blank">💬 Cotizar este plan</a>
+        </div>
+      </div>
+
+      <div style="background:var(--cream);border:1px solid var(--rule);border-radius:16px;padding:3rem;">
+        <p class="process-title" style="font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:var(--ink);margin-bottom:2.5rem;text-align:center;">Nuestro Proceso de Trabajo</p>
+        <div class="proc-grid">
+          <div class="proc"><div class="proc-ico">📋</div><p class="proc-name">1. Consulta</p><p class="proc-desc">Analizamos tus necesidades y público objetivo.</p></div>
+          <div class="proc"><div class="proc-ico">🎨</div><p class="proc-name">2. Diseño</p><p class="proc-desc">Creamos el concepto visual de tu página.</p></div>
+          <div class="proc"><div class="proc-ico">⚙️</div><p class="proc-name">3. Desarrollo</p><p class="proc-desc">Programamos con código limpio y optimizado.</p></div>
+          <div class="proc"><div class="proc-ico">📱</div><p class="proc-name">4. Revisión</p><p class="proc-desc">Pruebas en todos los dispositivos contigo.</p></div>
+          <div class="proc"><div class="proc-ico">🚀</div><p class="proc-name">5. Lanzamiento</p><p class="proc-desc">Publicamos y te enseñamos a administrarlo.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: CONTACTO
+══════════════════════════════════════ -->
+<div id="page-contacto" class="page">
+  <div class="page-banner">
+    <p class="eyebrow">Encuéntranos</p>
+    <h2>Hablemos <em>Hoy</em></h2>
+    <p>Estamos en Bogotá listos para ayudarte. Escríbenos y respondemos rápido.</p>
+  </div>
+  <section class="sec" style="background:var(--cream);">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="cc"><span class="cc-ico">📱</span><p class="cc-lbl">WhatsApp & Celular</p><p class="cc-val">313 275 5360</p></div>
+        <div class="cc"><span class="cc-ico">📍</span><p class="cc-lbl">Ubicación</p><p class="cc-val">Bogotá, Colombia</p></div>
+        <div class="cc"><span class="cc-ico">🕐</span><p class="cc-lbl">Horario</p><p class="cc-val">Lun–Sáb · 8am–7pm</p></div>
+        <div class="cc"><span class="cc-ico">👨‍💻</span><p class="cc-lbl">Técnico</p><p class="cc-val">Juan Camilo Cruz</p></div>
+      </div>
+      <div style="text-align:center;">
+        <a class="wa-big" href="https://wa.me/573132755360?text=Hola%20Cuervo%20Negro!%20Vi%20su%20página%20web%20y%20quiero%20más%20información." target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.118.553 4.107 1.523 5.836L.057 23.999l6.304-1.44A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.773 9.773 0 01-4.988-1.365l-.358-.213-3.713.848.879-3.614-.234-.371A9.775 9.775 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+          Escribir al WhatsApp — +57 313 275 5360
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════
+     FOOTER (siempre visible)
+══════════════════════════════════════ -->
+<footer>
+  <div class="foot-inner">
+    <div>
+      <p class="foot-logo">Cuervo<span>Negro</span></p>
+      <p class="foot-motto">Papelería & Servicios Técnicos</p>
+      <p class="foot-about">Negocio bogotano al servicio de estudiantes, profesionales y emprendedores. Papelería, técnico de sistemas, licencias de software y desarrollo web — todo en un solo lugar.</p>
+    </div>
+    <div>
+      <p class="foot-col-title">Papelería</p>
+      <ul class="foot-links">
+        <li><a onclick="nav('papeleria')">Útiles escolares</a></li>
+        <li><a onclick="nav('papeleria')">Impresiones</a></li>
+        <li><a onclick="nav('papeleria')">Suministros</a></li>
+        <li><a onclick="nav('papeleria')">Manualidades</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="foot-col-title">Técnico & Software</p>
+      <ul class="foot-links">
+        <li><a onclick="nav('tech')">Mantenimiento</a></li>
+        <li><a onclick="nav('tech')">Diagnóstico</a></li>
+        <li><a onclick="nav('licencias')">Licencias</a></li>
+        <li><a onclick="nav('cot')">Cotización PC</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="foot-col-title">Web & Contacto</p>
+      <ul class="foot-links">
+        <li><a onclick="nav('web')">Páginas web</a></li>
+        <li><a onclick="nav('web')">Planes y precios</a></li>
+        <li><a href="https://wa.me/573132755360" target="_blank">💬 WhatsApp</a></li>
+        <li><a onclick="nav('contacto')">📍 Bogotá, Colombia</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p class="foot-copy">© 2025 <strong>Cuervo Negro</strong> — Bogotá, Colombia</p>
+    <p class="foot-copy">Desarrollado por <strong>Juan Camilo Cruz Téllez</strong></p>
+  </div>
+</footer>
+
+<!-- FLOATING WA -->
+<div class="wa-float">
+  <div class="wa-tip">¡Escríbenos! 🖤</div>
+  <a class="wa-float-btn" href="https://wa.me/573132755360?text=Hola%20Cuervo%20Negro!%20Vi%20su%20página%20y%20quiero%20información." target="_blank">
+    <div class="wa-pulse"></div><div class="wa-pulse"></div>
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.118.553 4.107 1.523 5.836L.057 23.999l6.304-1.44A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.773 9.773 0 01-4.988-1.365l-.358-.213-3.713.848.879-3.614-.234-.371A9.775 9.775 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+  </a>
+</div>
+
+<script>
+/* ══════════════════════════════════════
+   NAVIGATION SYSTEM
+══════════════════════════════════════ */
+const PAGES = ['inicio','papeleria','tech','licencias','cot','web','contacto'];
+const NAV_IDS = {inicio:'nl-inicio',papeleria:'nl-papeleria',tech:'nl-tech',licencias:'nl-licencias',cot:'nl-cot',web:'nl-web',contacto:'nl-contacto'};
+
+function nav(pageId){
+  PAGES.forEach(p=>{
+    const el = document.getElementById('page-'+p);
+    if(el){ el.classList.toggle('active', p===pageId); }
+    const nl = document.getElementById(NAV_IDS[p]);
+    if(nl){ nl.classList.toggle('nav-active', p===pageId); }
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('navMenu').classList.remove('open');
+  // Update hash
+  history.pushState(null,'','#'+pageId);
+}
+
+// Handle hash on load
+window.addEventListener('load',()=>{
+  const hash = location.hash.replace('#','');
+  if(PAGES.includes(hash)) nav(hash);
+  else nav('inicio');
+});
+
+window.addEventListener('popstate',()=>{
+  const hash = location.hash.replace('#','');
+  if(PAGES.includes(hash)) nav(hash);
+});
+
+/* ══════════════════════════════════════
+   HAMBURGER
+══════════════════════════════════════ */
+document.getElementById('ham').addEventListener('click',()=>{
+  document.getElementById('navMenu').classList.toggle('open');
+});
+
+/* ══════════════════════════════════════
+   SCROLL REVEAL (IntersectionObserver)
+══════════════════════════════════════ */
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const siblings = Array.from(e.target.parentElement?.children||[]);
+      const i = siblings.indexOf(e.target);
+      setTimeout(()=>e.target.classList.add('up'), Math.min(i*70,320));
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+
+/* ══════════════════════════════════════
+   COTIZACIÓN FORM LOGIC
+══════════════════════════════════════ */
+let selectedPres = '';
+
+function selectPres(btn, val){
+  document.querySelectorAll('.pres-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedPres = val;
+  document.getElementById('f-presupuesto').value = val;
+  updateProgress();
+}
+
+function updateProgress(){
+  const fields = [
+    document.getElementById('f-nombre').value.trim(),
+    document.getElementById('f-uso').value,
+    document.getElementById('f-tipo').value,
+    selectedPres,
+    document.getElementById('f-cel').value.trim()
+  ];
+  const filled = fields.filter(f=>f!=='').length;
+  const pct = Math.round((filled/5)*100);
+  document.getElementById('fpFill').style.width = pct+'%';
+  document.getElementById('fpLabel').textContent = filled+' de 5 campos completados';
+}
+
+function enviarCotizacion(){
+  const nombre   = document.getElementById('f-nombre').value.trim();
+  const uso      = document.getElementById('f-uso').value;
+  const tipo     = document.getElementById('f-tipo').value;
+  const pres     = selectedPres;
+  const cel      = document.getElementById('f-cel').value.trim();
+  const ciudad   = document.getElementById('f-ciudad').value.trim();
+  const specs    = document.getElementById('f-specs').value.trim();
+
+  // Validation
+  if(!nombre){ alert('Por favor ingresa tu nombre.'); document.getElementById('f-nombre').focus(); return; }
+  if(!uso){ alert('Por favor selecciona el uso principal del equipo.'); document.getElementById('f-uso').focus(); return; }
+  if(!tipo){ alert('Por favor selecciona el tipo de equipo.'); document.getElementById('f-tipo').focus(); return; }
+  if(!pres){ alert('Por favor selecciona un rango de presupuesto.'); return; }
+  if(!cel){ alert('Por favor ingresa tu número de celular.'); document.getElementById('f-cel').focus(); return; }
+
+  // Build WhatsApp message
+  let msg = `Hola Cuervo Negro! 🖤 Quiero cotizar un equipo de cómputo.\n\n`;
+  msg += `📋 *SOLICITUD DE COTIZACIÓN*\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `👤 *Nombre:* ${nombre}\n`;
+  msg += `📱 *Celular:* ${cel}\n`;
+  if(ciudad) msg += `📍 *Ciudad:* ${ciudad}\n`;
+  msg += `\n💻 *Detalles del equipo:*\n`;
+  msg += `• *Uso principal:* ${uso}\n`;
+  msg += `• *Tipo de equipo:* ${tipo}\n`;
+  msg += `• *Presupuesto:* ${pres}\n`;
+  if(specs) msg += `\n📝 *Especificaciones adicionales:*\n${specs}\n`;
+  msg += `\n¡Espero su cotización! Gracias 😊`;
+
+  const url = `https://wa.me/573132755360?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+
+  // Show success
+  document.getElementById('theForm').style.display = 'none';
+  document.getElementById('cotSuccess').style.display = 'block';
+  document.getElementById('cotSuccess').classList.add('show');
+}
+
+function resetForm(){
+  document.getElementById('f-nombre').value = '';
+  document.getElementById('f-uso').value = '';
+  document.getElementById('f-tipo').value = '';
+  document.getElementById('f-cel').value = '';
+  document.getElementById('f-ciudad').value = '';
+  document.getElementById('f-specs').value = '';
+  document.querySelectorAll('.pres-btn').forEach(b=>b.classList.remove('selected'));
+  selectedPres = '';
+  updateProgress();
+  document.getElementById('theForm').style.display = 'grid';
+  document.getElementById('cotSuccess').style.display = 'none';
+  document.getElementById('cotSuccess').classList.remove('show');
+}
+</script>
+</body>
+</html>
